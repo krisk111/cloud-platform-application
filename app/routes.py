@@ -4,15 +4,18 @@ from flask import Blueprint, jsonify
 
 routes = Blueprint("routes", __name__)
 
-@routes.route('/')
+
+@routes.route("/")
 def home():
-   return jsonify(message="Hello from the cloud platform API")
+    return jsonify(message="Hello from the cloud platform API")
 
-@routes.route('/health')
+
+@routes.route("/health")
 def health():
-   return jsonify(status="Healthy")
+    return jsonify(status="Healthy")
 
-@routes.route('/version')
+
+@routes.route("/version")
 def version():
-   app_version = os.getenv("APP_VERSION", "dev")
-   return jsonify(version=app_version)
+    app_version = os.getenv("APP_VERSION", "dev")
+    return jsonify(version=app_version)
