@@ -38,3 +38,22 @@ jobs:
 
       - name: Build Docker image
         run: docker build --tag cloud-platform-application:ci .
+
+      - name: Start Docker Container 
+        run: |
+          docker run --detach \
+            --name cloud-platform-application \
+            --publish 8080:8080 \
+            cloud-platform-application:ci
+
+      - name: Wait for Application startup
+        run: sleep 5
+
+      - name: Verify health endpoint
+        run: curl --fail http://localhost:8080/health
+
+      - name: Stop Docker Container
+        if: always()
+        run: |
+          docker logs cloud-platform-application
+          docker rm --force cloud-platform-application
