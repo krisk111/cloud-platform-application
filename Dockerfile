@@ -15,4 +15,4 @@ COPY app ./app
 
 EXPOSE 8080
 
-CMD ["uv", "run", "flask", "--app", "app:create_app", "run", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uv", "run", "gunicorn", "--bind", "0.0.0.0:8080", "app:create_app()"]
