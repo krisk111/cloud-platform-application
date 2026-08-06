@@ -1,0 +1,6 @@
+apiVersion: v2
+name: cloud-platform-application
+description: Helm chart for the cloud platform application
+type: application
+version: 0.1.0
+appVersion: "dev"

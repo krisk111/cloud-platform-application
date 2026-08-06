@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image:
+  repository: cloud-platform-application
+  tag: local
+  pullPolicy: Never
+
+service:
+  port: 80
+  targetPort: 8080
+
+ingress:
+  enabled: true
+  host: cloud-platform.local
+
