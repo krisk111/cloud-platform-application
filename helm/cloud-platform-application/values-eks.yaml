@@ -1,0 +1,4 @@
+image:
+  repository: 281459851067.dkr.ecr.us-east-1.amazonaws.com/cloud-platform-application
+  tag: bd5de9ac9d7daea8e21944b1bbb021b48f0f2e5d
+  pullPolicy: IfNotPresent
