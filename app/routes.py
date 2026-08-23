@@ -17,5 +17,5 @@ def health():
 
 @routes.route("/version")
 def version():
-    app_version = os.getenv("APP_VERSION", "dev")
+    app_version = os.getenv("APP_VERSION", "dev-v2")
     return jsonify(version=app_version)
