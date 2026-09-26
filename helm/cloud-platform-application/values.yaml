@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: cloud-platform-application
   tag: local
-  pullPolicy: Never
+  pullPolicy: IfNotPresent
 
 service:
   port: 80
