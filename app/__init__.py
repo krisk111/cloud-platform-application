@@ -24,12 +24,10 @@ def create_app():
         duration = time.perf_counter() - g.request_start_time
 
         # Record request latency in the Prometheus histogram.
-        http_request_duration_seconds.labels( 
-            endpoint=request.path
-        ).observe(duration)
+        http_request_duration_seconds.labels(endpoint=request.path).observe(duration)
 
         # Record request count by endpoint and HTTP status codes - for error rate calculations.
-        http_requests_total.labels( 
+        http_requests_total.labels(
             endpoint=request.path,
             status=str(response.status_code),
         ).inc()
