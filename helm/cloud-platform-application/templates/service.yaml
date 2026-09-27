@@ -3,13 +3,16 @@ kind: Service
 
 metadata:
   name: cloud-platform-application
+  labels:
+    application: cloud-platform-application
 
 spec:
   selector:
     application: cloud-platform-application
 
   ports:
-    - port: {{ .Values.service.port }}
+    - name: http
+      port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.targetPort }}
 
   type: ClusterIP
