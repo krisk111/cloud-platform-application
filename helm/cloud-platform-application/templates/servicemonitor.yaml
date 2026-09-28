@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+
+metadata:
+  name: cloud-platform-application
+  labels:
+    release: kube-prometheus-stack
+
+spec:
+  selector:
+    matchLabels:
+      application: cloud-platform-application
+
+  endpoints:
+    - port: http
+      path: /metrics
