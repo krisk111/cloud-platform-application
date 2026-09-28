@@ -8,13 +8,13 @@ routes = Blueprint("routes", __name__)
 http_requests_total = Counter(
     "http_requests_total",
     "Total HTTP requests",
-    ["endpoint", "status"],
+    ["path", "status"],
 )
 
 http_request_duration_seconds = Histogram(
     "http_request_duration_seconds",
     "HTTP request latency in seconds",
-    ["endpoint"],
+    ["path"],
 )
 
 
