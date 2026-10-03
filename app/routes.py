@@ -1,6 +1,7 @@
 import os
+import json
 
-from flask import Blueprint, Response, jsonify
+from flask import Blueprint, Response, current_app, jsonify
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
 
 routes = Blueprint("routes", __name__)
@@ -33,6 +34,15 @@ def home():
 
 @routes.route("/health")
 def health():
+    current_app.logger.info(
+        json.dumps(
+            {
+                "event": "health_check",
+                "path": "/health",
+                "status": 200,
+            }
+        )
+    )
     return jsonify(status="Healthy")
 
 

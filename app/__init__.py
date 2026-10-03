@@ -5,6 +5,7 @@ from flask import Flask, g, request
 
 def create_app():
     app = Flask(__name__)
+    app.logger.setLevel("INFO")
 
     from app.routes import (
         http_request_duration_seconds,
