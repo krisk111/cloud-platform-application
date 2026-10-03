@@ -1,5 +1,5 @@
-import os
 import json
+import os
 
 from flask import Blueprint, Response, current_app, jsonify
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
