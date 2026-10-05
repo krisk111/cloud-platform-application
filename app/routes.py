@@ -2,7 +2,10 @@ import json
 import os
 
 from flask import Blueprint, Response, current_app, jsonify
+from opentelemetry import trace
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
+
+tracer = trace.get_tracer(__name__)
 
 routes = Blueprint("routes", __name__)
 
@@ -34,16 +37,19 @@ def home():
 
 @routes.route("/health")
 def health():
-    current_app.logger.info(
-        json.dumps(
-            {
-                "event": "health_check",
-                "path": "/health",
-                "status": 200,
-            }
+    with tracer.start_as_current_span("perform_health_check") as span:
+        span.set_attribute("health.check.type", "application")
+        span.set_attribute("health.check.result", "healthy")
+        current_app.logger.info(
+            json.dumps(
+                {
+                    "event": "health_check",
+                    "path": "/health",
+                    "status": 200,
+                }
+            )
         )
-    )
-    return jsonify(status="Healthy")
+        return jsonify(status="Healthy")
 
 
 @routes.route("/version")

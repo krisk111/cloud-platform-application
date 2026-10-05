@@ -23,6 +23,14 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 8080
+          env:
+            - name: OTEL_TRACES_EXPORTER
+              value: {{ .Values.otel.tracesExporter | quote }}
+
+            {{- if eq .Values.otel.tracesExporter "otlp" }}
+            - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+              value: {{ .Values.otel.tracesEndpoint | quote }}
+            {{- end }}
           readinessProbe:
             httpGet:
               path: /health

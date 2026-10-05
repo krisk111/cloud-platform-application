@@ -13,3 +13,6 @@ ingress:
   enabled: true
   host: cloud-platform.local
 
+otel:
+  tracesExporter: console
+  tracesEndpoint: ""
